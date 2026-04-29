@@ -3,6 +3,7 @@ import ReactMarkdown from "react-markdown";
 
 import styles from "./Questions.module.css";
 function Questions({ questions, pageNumber, setPageNumber }) {
+  const totalPages = Math.ceil(questions?.total / questions?.limit);
   return (
     <div className={styles.questionContainer}>
       <h2>Вопросы React, JavaScript</h2>
@@ -24,7 +25,11 @@ function Questions({ questions, pageNumber, setPageNumber }) {
           );
         })}
       </ul>
-      <Pagination page={pageNumber} total={24} onChange={setPageNumber} />
+      <Pagination
+        page={pageNumber}
+        total={totalPages}
+        onChange={setPageNumber}
+      />
     </div>
   );
 }
