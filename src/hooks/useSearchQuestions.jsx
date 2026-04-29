@@ -24,7 +24,7 @@ function useSearchQuestions(filters) {
     }
 
     if (selectedSkill) {
-      url += `&skillFilterMode[]=${selectedSkill}`;
+      url += `&skills=${selectedSkill}`;
     }
 
     if (selectedLevels) {
@@ -43,7 +43,6 @@ function useSearchQuestions(filters) {
       .then((response) => response.json())
       .then((data) => setQuestions(data))
       .catch((error) => console.error("Error: ", error));
-    console.log(url);
   }, [
     keywords,
     pageNumber,

@@ -1,6 +1,13 @@
 import { useState } from "react";
 import styles from "./FilterButtons.module.css";
-function FilterButtons({ name, title, buttons, selected, setSelected }) {
+function FilterButtons({
+  name,
+  title,
+  valueKey = title,
+  buttons,
+  selected,
+  setSelected,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const allFilters = buttons || [];
   const showFilters = isOpen ? allFilters : allFilters.slice(0, 6);
@@ -14,7 +21,7 @@ function FilterButtons({ name, title, buttons, selected, setSelected }) {
             <li key={filter.id}>
               <button
                 className={isChosen ? "btn_active" : "btn_usual"}
-                onClick={() => setSelected(filter[title])}
+                onClick={() => setSelected(filter[valueKey])}
               >
                 {filter.title}
               </button>

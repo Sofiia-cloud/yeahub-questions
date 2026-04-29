@@ -58,6 +58,7 @@ function FilterPanel({ values, actions, data }) {
       <FilterButtons
         name={"Навыки"}
         title={"title"}
+        valueKey={"id"}
         buttons={skills}
         selected={selectedSkill}
         setSelected={setSelectedSkill}
