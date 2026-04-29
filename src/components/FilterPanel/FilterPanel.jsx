@@ -27,17 +27,17 @@ function FilterPanel({ values, actions, data }) {
   ];
 
   const ratingConfig = [
-    { title: 1 },
-    { title: 2 },
-    { title: 3 },
-    { title: 4 },
-    { title: 5 },
+    { id: 1, title: 1 },
+    { id: 2, title: 2 },
+    { id: 3, title: 3 },
+    { id: 4, title: 4 },
+    { id: 5, title: 5 },
   ];
 
   const statusConfig = [
-    { title: "Изученные" },
-    { title: "Не изученные" },
-    { title: "Все" },
+    { id: 1, title: "Изученные" },
+    { id: 2, title: "Не изученные" },
+    { id: 3, title: "Все" },
   ];
 
   return (
@@ -63,21 +63,21 @@ function FilterPanel({ values, actions, data }) {
       />
       <FilterButtons
         name={"Уровень сложности"}
-        title={"levels"}
+        title={"title"}
         buttons={levelsConfig}
         selected={selectedLevels}
         setSelected={setSelectedLevels}
       />
       <FilterButtons
         name={"Рейтинг"}
-        title={"rating"}
+        title={"title"}
         buttons={ratingConfig}
         selected={selectedRating}
         setSelected={setSelectedRating}
       />
       <FilterButtons
         name={"Статус"}
-        title={"status"}
+        title={"title"}
         buttons={statusConfig}
         selected={selectedStatus}
         setSelected={setSelectedStatus}

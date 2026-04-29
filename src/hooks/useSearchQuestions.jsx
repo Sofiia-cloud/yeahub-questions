@@ -12,10 +12,11 @@ function useSearchQuestions(filters) {
   } = filters;
   useEffect(() => {
     async function fetchQuestions() {
-      let url = `https://api.yeatwork.ru/questions/public-questions?page=${pageNumber}&limit=10`;
+      const page = pageNumber ?? 1;
+      let url = `https://api.yeatwork.ru/questions/public-questions?page=${page}&limit=10`;
 
       if (keywords?.trim() !== "") {
-        const searchParam = encodeURIComponent(keywords);
+        const searchParam = encodeURIComponent(keywords ?? "");
         url += `&keywords=${searchParam}`;
       }
 

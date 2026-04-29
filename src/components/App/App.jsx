@@ -13,6 +13,7 @@ function App() {
   const questions = useSearchQuestions({ filterValues });
   const specializations = useSpecializations();
   const skills = useSkills();
+
   return (
     <>
       <Header />

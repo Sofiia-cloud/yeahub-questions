@@ -4,7 +4,7 @@ function Questions({ questions }) {
       <h2>Вопросы React, JavaScript</h2>
       <hr />
       <ul>
-        {questions?.map((question) => {
+        {questions?.data.map((question) => {
           return (
             <li>
               <h3>{question.title}</h3>
