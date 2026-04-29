@@ -11,43 +11,39 @@ function useSearchQuestions(filters) {
     selectedStatus,
   } = filters;
   useEffect(() => {
-    async function fetchQuestions() {
-      const page = pageNumber ?? 1;
-      let url = `https://api.yeatwork.ru/questions/public-questions?page=${page}&limit=10`;
+    const page = pageNumber ?? 1;
+    let url = `https://api.yeatwork.ru/questions/public-questions?page=${page}&limit=10`;
 
-      if (keywords && keywords?.trim() !== "") {
-        const searchParam = encodeURIComponent(keywords ?? "");
-        url += `&keywords=${searchParam}`;
-      }
-
-      if (selectedSpec) {
-        url += `&specializationSlug=${selectedSpec}`;
-      }
-
-      if (selectedSkill) {
-        url += `&skillFilterMode[]=${selectedSkill}`;
-      }
-
-      if (selectedLevels) {
-        url += `&complexity[]=${selectedLevels}`;
-      }
-
-      if (selectedRating) {
-        url += `&rate[]=${selectedRating}`;
-      }
-
-      if (selectedStatus) {
-        url += `&status[]=${selectedStatus}`;
-      }
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => setQuestions(data))
-        .catch((error) => console.error("Error: ", error));
-      console.log(url);
+    if (keywords && keywords?.trim() !== "") {
+      const searchParam = encodeURIComponent(keywords ?? "");
+      url += `&keywords=${searchParam}`;
     }
 
-    fetchQuestions();
+    if (selectedSpec) {
+      url += `&specializationSlug=${selectedSpec}`;
+    }
+
+    if (selectedSkill) {
+      url += `&skillFilterMode[]=${selectedSkill}`;
+    }
+
+    if (selectedLevels) {
+      url += `&complexity[]=${selectedLevels}`;
+    }
+
+    if (selectedRating) {
+      url += `&rate[]=${selectedRating}`;
+    }
+
+    if (selectedStatus) {
+      url += `&status[]=${selectedStatus}`;
+    }
+
+    fetch(url)
+      .then((response) => response.json())
+      .then((data) => setQuestions(data))
+      .catch((error) => console.error("Error: ", error));
+    console.log(url);
   }, [
     keywords,
     pageNumber,

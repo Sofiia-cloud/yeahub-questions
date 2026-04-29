@@ -9,7 +9,7 @@ function FilterButtons({ name, title, buttons, selected, setSelected }) {
       <p className={styles.specializationContainer__header}>{name}</p>
       <ul>
         {showFilters.map((filter) => {
-          const isChosen = filter.title === selected;
+          const isChosen = filter[title] === selected;
           return (
             <li key={filter.id}>
               <button

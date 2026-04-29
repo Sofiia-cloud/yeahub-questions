@@ -10,10 +10,10 @@ import FilterPanel from "../FilterPanel/FilterPanel";
 
 function App() {
   const [filterValues, filterActions] = useFilter();
-  const questions = useSearchQuestions({ filterValues });
+  const questions = useSearchQuestions(filterValues);
   const specializations = useSpecializations();
   const skills = useSkills();
-  console.log(questions);
+
   return (
     <>
       <Header />

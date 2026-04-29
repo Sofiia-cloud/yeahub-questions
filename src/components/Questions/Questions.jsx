@@ -3,7 +3,6 @@ import ReactMarkdown from "react-markdown";
 
 import styles from "./Questions.module.css";
 function Questions({ questions, pageNumber, setPageNumber }) {
-  console.log(questions?.data);
   return (
     <div className={styles.questionContainer}>
       <h2>Вопросы React, JavaScript</h2>
