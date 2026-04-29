@@ -15,7 +15,7 @@ function useSearchQuestions(filters) {
       const page = pageNumber ?? 1;
       let url = `https://api.yeatwork.ru/questions/public-questions?page=${page}&limit=10`;
 
-      if (keywords?.trim() !== "") {
+      if (keywords && keywords?.trim() !== "") {
         const searchParam = encodeURIComponent(keywords ?? "");
         url += `&keywords=${searchParam}`;
       }
@@ -44,7 +44,9 @@ function useSearchQuestions(filters) {
         .then((response) => response.json())
         .then((data) => setQuestions(data))
         .catch((error) => console.error("Error: ", error));
+      console.log(url);
     }
+
     fetchQuestions();
   }, [
     keywords,

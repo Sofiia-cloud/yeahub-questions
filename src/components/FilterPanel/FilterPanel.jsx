@@ -1,4 +1,5 @@
 import FilterButtons from "../filterButtons/FilterButtons";
+import styles from "./FilterPanel.module.css";
 
 function FilterPanel({ values, actions, data }) {
   const {
@@ -41,7 +42,7 @@ function FilterPanel({ values, actions, data }) {
   ];
 
   return (
-    <div>
+    <div className={styles.filterPanelContainter}>
       <input
         placeholder="Введите запрос…"
         value={keywords}

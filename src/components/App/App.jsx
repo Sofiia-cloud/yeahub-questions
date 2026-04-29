@@ -13,12 +13,16 @@ function App() {
   const questions = useSearchQuestions({ filterValues });
   const specializations = useSpecializations();
   const skills = useSkills();
-
+  console.log(questions);
   return (
     <>
       <Header />
       <main>
-        <Questions questions={questions} />
+        <Questions
+          questions={questions}
+          pageNumber={filterValues.pageNumber}
+          setPageNumber={filterActions.setPageNumber}
+        />
         <FilterPanel
           values={filterValues}
           actions={filterActions}

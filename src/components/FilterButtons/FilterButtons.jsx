@@ -1,34 +1,37 @@
 import { useState } from "react";
+import styles from "./FilterButtons.module.css";
 function FilterButtons({ name, title, buttons, selected, setSelected }) {
   const [isOpen, setIsOpen] = useState(false);
   const allFilters = buttons || [];
   const showFilters = isOpen ? allFilters : allFilters.slice(0, 6);
   return (
-    <div>
-      <p>{name}</p>
+    <div className={styles.specializationContainer}>
+      <p className={styles.specializationContainer__header}>{name}</p>
       <ul>
         {showFilters.map((filter) => {
-          const isChosen = filter[title] === selected;
+          const isChosen = filter.title === selected;
           return (
             <li key={filter.id}>
               <button
-                className={isChosen ? "" : ""}
+                className={isChosen ? "btn_active" : "btn_usual"}
                 onClick={() => setSelected(filter[title])}
               >
-                {filter[title]}
+                {filter.title}
               </button>
             </li>
           );
         })}
       </ul>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          setIsOpen(!isOpen);
-        }}
-      >
-        {isOpen ? "Скрыть" : "Посмотреть все"}
-      </button>
+      {allFilters.length > 6 && (
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setIsOpen(!isOpen);
+          }}
+        >
+          {isOpen ? "Скрыть" : "Посмотреть все"}
+        </button>
+      )}
     </div>
   );
 }
