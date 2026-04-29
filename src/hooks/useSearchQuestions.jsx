@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-function useSearchQuestions({ filters }) {
+function useSearchQuestions(filters) {
   const [questions, setQuestions] = useState(null);
   const {
     keywords,
@@ -8,6 +8,7 @@ function useSearchQuestions({ filters }) {
     selectedSkill,
     selectedLevels,
     selectedRating,
+    selectedStatus,
   } = filters;
   useEffect(() => {
     async function fetchQuestions() {
@@ -34,6 +35,10 @@ function useSearchQuestions({ filters }) {
         url += `&rate[]=${selectedRating}`;
       }
 
+      if (selectedStatus) {
+        url += `&status[]=${selectedStatus}`;
+      }
+
       fetch(url)
         .then((response) => response.json())
         .then((data) => setQuestions(data))
@@ -47,6 +52,7 @@ function useSearchQuestions({ filters }) {
     selectedSkill,
     selectedLevels,
     selectedRating,
+    selectedStatus,
   ]);
   return questions;
 }
