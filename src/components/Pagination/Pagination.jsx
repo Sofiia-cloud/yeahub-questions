@@ -1,3 +1,4 @@
+import styles from "./Pagination.module.css";
 export function Pagination({ page, total, onChange }) {
   const getPagination = (total) => {
     const pages = [];
@@ -22,20 +23,20 @@ export function Pagination({ page, total, onChange }) {
   const last = paginationItems[paginationItems.length - 1];
 
   return (
-    <div className="pagination">
+    <div className={styles.pagination}>
       <button
-        className="arrow_left"
+        className={styles.arrow_left}
         disabled={page === 1 ? true : false}
         onClick={() => {
           onChange(page - 1);
         }}
       ></button>
-      <div className="pagination__numbers">
+      <div className={styles.pagination__numbers}>
         {paginationItems.map((item, index) => {
           return (
             <button
               key={index}
-              className={item === page ? "active" : ""}
+              className={item === page ? styles.active : ""}
               onClick={() => {
                 if (item !== "...") {
                   onChange(item);
@@ -48,7 +49,7 @@ export function Pagination({ page, total, onChange }) {
         })}
       </div>
       <button
-        className="arrow_right"
+        className={styles.arrow_right}
         disabled={page === last ? true : false}
         onClick={() => {
           onChange(page + 1);

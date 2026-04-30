@@ -6,7 +6,7 @@ function Questions({ questions, pageNumber, setPageNumber }) {
   const totalPages = Math.ceil(questions?.total / questions?.limit);
   return (
     <div className={styles.questionContainer}>
-      <h2>Вопросы React, JavaScript</h2>
+      <h2>Вопросы</h2>
       <hr />
       <ul>
         {questions?.data.map((question) => {
@@ -14,8 +14,13 @@ function Questions({ questions, pageNumber, setPageNumber }) {
             <li key={question.id}>
               <h3>{question.title}</h3>
               <div>
-                <span>Рейтинг: {question.rate}</span>
-                <span>Сложность: {question.complexity}</span>
+                <span className={styles.tag_name}>
+                  Рейтинг: <span className={styles.tag}>{question.rate}</span>
+                </span>
+                <span className={styles.tag_name}>
+                  Сложность:{" "}
+                  <span className={styles.tag}>{question.complexity}</span>
+                </span>
               </div>
               {question.imageSrc && (
                 <img src={question.imageSrc} alt="Изображение ответа" />

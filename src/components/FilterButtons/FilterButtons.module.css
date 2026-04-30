@@ -1,48 +1,80 @@
 .specializationContainer {
-  display: grid;
-  max-width: 360px;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 8px;
-  max-height: 500px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .specializationContainer__header {
   font-size: 14px;
-  color: var(--color-text-primary);
-  font-weight: 300;
-  margin-bottom: 8px;
+  color: #1a1a2e;
+  margin: 0;
+  letter-spacing: 0.3px;
 }
 
-.raitingPanelContainer__header {
-  font-size: 14px;
-  color: var(--color-text-primary);
-  font-weight: 300;
-  margin-bottom: 8px;
-}
-
-.raitingPanelContainer {
-  display: grid;
-  max-width: 360px;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+/* Изменяем ul на flex-wrap для горизонтального расположения */
+.specializationContainer ul {
+  display: flex;
+  flex-direction: row; /* ← меняем column на row */
+  flex-wrap: wrap; /* ← перенос на новую строку */
   gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.skillsPanelContainer__header {
+.specializationContainer li {
+  list-style: none;
+  width: auto; /* ← ширина по содержимому */
+}
+
+/* Кнопки по длине содержимого */
+.specializationContainer button {
+  width: auto; /* ← убираем 100% */
+  padding: 8px 16px; /* ← горизонтальные отступы */
+  text-align: center; /* ← центр текста */
+  background-color: white;
+  border: 1px solid #e9ecef;
+  border-radius: 20px; /* ← скругленные края как теги */
+  cursor: pointer;
+  transition: all 0.3s ease;
   font-size: 14px;
-  color: var(--color-text-primary);
-  font-weight: 300;
-  margin-bottom: 8px;
+  color: black;
+  font-weight: 400;
+  white-space: nowrap; /* ← текст не переносится */
 }
 
-.skillsPanelContainer {
-  display: grid;
-  width: 100%;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+.specializationContainer button:hover {
+  background-color: #e9ecef;
+  border-color: #5509cc;
+  color: #5509cc;
 }
 
-.skillIcon {
-  width: 30px;
-  height: 30px;
+.specializationContainer button.btn_active {
+  background-color: #5509cc;
+  border-color: #5509cc;
+  color: #ffffff;
+}
+
+.specializationContainer button.btn_usual {
+  background-color: #f8f9fa;
+  border-color: #e9ecef;
+  color: #495057;
+}
+
+.specializationContainer > button:last-child {
+  margin-top: 4px;
+  text-align: center;
+  background: none;
+  border: none;
+  color: #5509cc;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px;
+  width: auto; /* ← кнопка "Посмотреть все" тоже по содержимому */
+}
+
+.specializationContainer > button:last-child:hover {
+  background-color: #f8f9fa;
+  border-radius: 8px;
 }
