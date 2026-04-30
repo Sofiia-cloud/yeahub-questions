@@ -11,11 +11,10 @@
   letter-spacing: 0.3px;
 }
 
-/* Изменяем ul на flex-wrap для горизонтального расположения */
 .specializationContainer ul {
   display: flex;
-  flex-direction: row; /* ← меняем column на row */
-  flex-wrap: wrap; /* ← перенос на новую строку */
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 8px;
   list-style: none;
   padding: 0;
@@ -24,23 +23,22 @@
 
 .specializationContainer li {
   list-style: none;
-  width: auto; /* ← ширина по содержимому */
+  width: auto;
 }
 
-/* Кнопки по длине содержимого */
 .specializationContainer button {
-  width: auto; /* ← убираем 100% */
-  padding: 8px 16px; /* ← горизонтальные отступы */
-  text-align: center; /* ← центр текста */
+  width: auto;
+  padding: 8px 16px;
+  text-align: center;
   background-color: white;
   border: 1px solid #e9ecef;
-  border-radius: 20px; /* ← скругленные края как теги */
+  border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
   font-size: 14px;
   color: black;
   font-weight: 400;
-  white-space: nowrap; /* ← текст не переносится */
+  white-space: nowrap;
 }
 
 .specializationContainer button:hover {
@@ -67,14 +65,11 @@
   background: none;
   border: none;
   color: #5509cc;
+  text-decoration-style: solid;
+  text-underline-offset: 4px;
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
   padding: 8px;
-  width: auto; /* ← кнопка "Посмотреть все" тоже по содержимому */
-}
-
-.specializationContainer > button:last-child:hover {
-  background-color: #f8f9fa;
-  border-radius: 8px;
+  width: auto;
 }
