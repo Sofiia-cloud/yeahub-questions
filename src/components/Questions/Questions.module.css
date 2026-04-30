@@ -23,6 +23,30 @@
   border-top: 1px solid #e9ecef;
   margin: 0 0 16px 0;
 }
+.arrowButton {
+  background: none;
+  border: 1px solid #e9ecef;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6a0bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.arrowButton:hover {
+  background-color: #f8f9fa;
+  border-color: #6a0bff;
+}
+
+.arrowButton.open {
+  transform: rotate(180deg);
+}
 
 .questionContainer ul {
   display: flex;
