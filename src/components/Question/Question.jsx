@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styles from "./Question.module.css";
 function Question({ question, isOpen, toggleQuestion }) {
   return (
@@ -24,6 +25,9 @@ function Question({ question, isOpen, toggleQuestion }) {
             <img src={question.imageSrc} alt="Изображение ответа" />
           )}
           <p dangerouslySetInnerHTML={{ __html: question.shortAnswer }} />
+          <Link className={styles.link} to={`/${question.id}`}>
+            Подробнее →
+          </Link>
         </>
       )}
     </li>
