@@ -19,6 +19,7 @@ function Questions({ questions, pageNumber, setPageNumber }) {
           const isOpen = openQuestionId === question.id;
           return (
             <Question
+              key={question.id}
               question={question}
               isOpen={isOpen}
               toggleQuestion={toggleQuestion}

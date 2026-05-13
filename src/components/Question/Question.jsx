@@ -6,7 +6,6 @@ function Question({ question, isOpen, toggleQuestion }) {
       <button
         className={`${styles.arrowButton} ${isOpen ? styles.open : ""}`}
         onClick={() => toggleQuestion(question.id)}
-        onClick={() => toggleQuestion(question.id)}
       >
         {isOpen ? "▲" : "▼"}
       </button>
