@@ -1,35 +1,36 @@
-import { useState } from "react";
+// src/hooks/useFilter.js
+import useSearchQuestions from './useSearchQuestions';
 
 function useFilter() {
-  const [keywords, setKeywords] = useState("");
-  const [selectedSpec, setSelectedSpec] = useState("");
-  const [selectedSkill, setSelectedSkill] = useState("");
-  const [selectedLevels, setSelectedLevels] = useState("");
-  const [selectedRating, setSelectedRating] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("");
-  const [pageNumber, setPageNumber] = useState(1);
+  // Получаем всё из нашего нового главного хука
+  const { filters, questions, updateFilters, loading } = useSearchQuestions();
 
-  const values = {
-    keywords,
-    selectedSpec,
-    selectedSkill,
-    selectedLevels,
-    selectedRating,
-    selectedStatus,
-    pageNumber,
+  // Создаём удобные методы для обновления каждого фильтра по отдельности
+  const filterActions = {
+    setKeywords: (keywords) => updateFilters({ keywords }),
+    setPageNumber: (pageNumber) => updateFilters({ pageNumber }),
+    setSelectedSpec: (spec) => updateFilters({ selectedSpec: spec }),
+    setSelectedSkill: (skill) => updateFilters({ selectedSkill: skill }),
+    setSelectedLevels: (level) => updateFilters({ selectedLevels: level }),
+    setSelectedRating: (rating) => updateFilters({ selectedRating: rating }),
+    setSelectedStatus: (status) => updateFilters({ selectedStatus: status }),
+    clearFilters: () => updateFilters({ // Метод для сброса всех фильтров
+      keywords: '',
+      selectedSpec: '',
+      selectedSkill: '',
+      selectedLevels: '',
+      selectedRating: '',
+      selectedStatus: '',
+      pageNumber: 1,
+    }),
   };
 
-  const actions = {
-    setKeywords,
-    setSelectedSpec,
-    setSelectedSkill,
-    setSelectedLevels,
-    setSelectedRating,
-    setSelectedStatus,
-    setPageNumber,
+  // Возвращаем всё, что нужно в Main.jsx
+  return {
+    filterValues: { ...filters, questions }, // Объединяем фильтры и данные вопросов
+    filterActions,
+    loading,
   };
-
-  return [values, actions];
 }
 
 export default useFilter;

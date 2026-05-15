@@ -1,23 +1,27 @@
-import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer.jsx";
+// src/Main.jsx
 import Questions from "../components/Questions/Questions";
-import useSpecializations from "../components/../hooks/useSpecializations";
-import useSkills from "../components/../hooks/useSkills";
-import useSearchQuestions from "../components/../hooks/useSearchQuestions";
-import useFilter from "../components/../hooks/useFilter";
 import FilterPanel from "../components/FilterPanel/FilterPanel";
+import useSpecializations from "../hooks/useSpecializations";
+import useSkills from "../hooks/useSkills";
+import useFilter from "../hooks/useFilter"; // Обновлённый хук
 
 function Main() {
-  const [filterValues, filterActions] = useFilter();
-  const questions = useSearchQuestions(filterValues);
+  // Теперь useFilter возвращает объект!
+  const { filterValues, filterActions, loading } = useFilter();
+
   const specializations = useSpecializations();
   const skills = useSkills();
+
+  // Данные для передачи в компоненты
+  const questions = filterValues.questions;
+  const pageNumber = filterValues.pageNumber;
 
   return (
     <>
       <Questions
         questions={questions}
-        pageNumber={filterValues.pageNumber}
+        loading={loading}
+        pageNumber={pageNumber}
         setPageNumber={filterActions.setPageNumber}
       />
       <FilterPanel
