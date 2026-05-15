@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styles from "./DetailedQuestion.module.css";
 
 function DetailedQuestion({ question }) {
@@ -11,34 +11,24 @@ function DetailedQuestion({ question }) {
   const prevId = currentId - 1;
   const nextId = currentId + 1;
 
-  
   const getShortLongAnswer = () => {
     if (!question.longAnswer) return "Нет развёрнутого ответа";
-
-   
     const textWithoutHtml = question.longAnswer.replace(/<[^>]*>/g, "");
-
-    if (textWithoutHtml.length <= 100) {
-      return question.longAnswer;
-    }
-
-    
+    if (textWithoutHtml.length <= 100) return question.longAnswer;
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = question.longAnswer;
     const text = tempDiv.textContent || tempDiv.innerText || "";
-    const truncated = text.slice(0, 100) + "...";
-
-    return truncated;
+    return text.slice(0, 100) + "...";
   };
 
   return (
     <div className={styles.detailedContainer}>
-      <div className={styles.header}>
+      <div className={styles.headerCard}>
         <h1>{question.title}</h1>
         <p>{question.description}</p>
       </div>
 
-      <div className={styles.navigation}>
+      <div className={styles.navigationCard}>
         <button
           className={styles.navButton}
           onClick={() => navigate(`/${prevId}`)}
@@ -53,7 +43,7 @@ function DetailedQuestion({ question }) {
         </button>
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.sectionCard}>
         <h2>Краткий ответ</h2>
         <div
           className={styles.answer}
@@ -63,7 +53,7 @@ function DetailedQuestion({ question }) {
         />
       </div>
 
-      <div className={styles.section}>
+      <div className={styles.sectionCard}>
         <h2>Развёрнутый ответ</h2>
         {isOpen ? (
           <>
