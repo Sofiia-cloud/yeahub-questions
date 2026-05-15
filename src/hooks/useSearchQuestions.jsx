@@ -1,4 +1,3 @@
-// hooks/useSearchQuestions.jsx
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
@@ -7,10 +6,37 @@ function useSearchQuestions() {
   const [questions, setQuestions] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // ✅ Этот эффект должен срабатывать при КАЖДОМ изменении searchParams
-  useEffect(() => {
-    console.log("🔔 searchParams ИЗМЕНИЛИСЬ:", searchParams.toString()); // Должно появляться при каждом изменении
+  const updateFilters = (newFilters) => {
+    const updatedParams = new URLSearchParams(searchParams);
 
+    Object.entries(newFilters).forEach(([key, value]) => {
+      let paramKey = key;
+      if (key === "pageNumber") paramKey = "page";
+      if (key === "selectedSpec") paramKey = "specializationSlug";
+      if (key === "selectedSkill") paramKey = "skills";
+      if (key === "selectedLevels") paramKey = "complexity";
+      if (key === "selectedRating") paramKey = "rate";
+      if (key === "selectedStatus") paramKey = "status";
+
+      if (value && value !== "" && value !== null && value !== "all") {
+        updatedParams.set(paramKey, value);
+      } else {
+        updatedParams.delete(paramKey);
+      }
+    });
+
+    if (
+      newFilters.page === undefined &&
+      newFilters.pageNumber === undefined &&
+      Object.keys(newFilters).length > 0
+    ) {
+      updatedParams.set("page", "1");
+    }
+
+    setSearchParams(updatedParams);
+  };
+
+  useEffect(() => {
     const fetchQuestions = async () => {
       setLoading(true);
 
@@ -24,30 +50,41 @@ function useSearchQuestions() {
 
       let url = `https://api.yeatwork.ru/questions/public-questions?page=${page}&limit=10`;
 
-      if (keywords.trim())
+      if (keywords?.trim()) {
         url += `&keywords=${encodeURIComponent(keywords.trim())}`;
-      if (specializationSlug)
+      }
+      if (specializationSlug) {
         url += `&specializationSlug=${specializationSlug}`;
-      if (skills) url += `&skills=${skills}`;
-      if (complexity) url += `&complexity[]=${complexity}`;
-      if (rate) url += `&rate[]=${rate}`;
-      if (status) url += `&status[]=${status}`;
-
-      console.log("🌐 ЗАПРОС К API:", url);
+      }
+      if (skills) {
+        url += `&skills=${skills}`;
+      }
+      if (complexity) {
+        url += `&complexity[]=${complexity}`;
+      }
+      if (rate) {
+        url += `&rate[]=${rate}`;
+      }
+      if (status) {
+        url += `&status[]=${status}`;
+      }
 
       try {
         const response = await fetch(url);
+        if (!response.ok) throw new Error("Ошибка загрузки");
         const data = await response.json();
+
         setQuestions(data);
       } catch (error) {
         console.error("Ошибка:", error);
+        setQuestions(null);
       } finally {
         setLoading(false);
       }
     };
 
     fetchQuestions();
-  }, [searchParams]); // ✅ ЗАВИСИМОСТЬ от searchParams
+  }, [searchParams]);
 
   const filters = {
     keywords: searchParams.get("keywords") || "",
@@ -57,30 +94,6 @@ function useSearchQuestions() {
     selectedLevels: searchParams.get("complexity") || "",
     selectedRating: searchParams.get("rate") || "",
     selectedStatus: searchParams.get("status") || "",
-  };
-
-  // ✅ updateFilters должен ОБНОВЛЯТЬ searchParams, а не делать fetch напрямую
-  const updateFilters = (newFilters) => {
-    const updatedParams = new URLSearchParams(searchParams);
-
-    Object.entries(newFilters).forEach(([key, value]) => {
-      const paramKey = key === "pageNumber" ? "page" : key;
-      if (value && value !== "" && value !== null && value !== "all") {
-        updatedParams.set(paramKey, value);
-      } else if (key !== "pageNumber") {
-        updatedParams.delete(paramKey);
-      }
-    });
-
-    if (
-      newFilters.pageNumber === undefined &&
-      Object.keys(newFilters).length > 0
-    ) {
-      updatedParams.set("page", "1");
-    }
-
-    console.log("🔄 updateFilters, новый URL:", updatedParams.toString());
-    setSearchParams(updatedParams); // ← ТОЛЬКО ЭТО! fetch сам сработает из-за зависимости
   };
 
   return { filters, questions, updateFilters, loading };

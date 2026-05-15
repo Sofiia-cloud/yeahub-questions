@@ -1,11 +1,11 @@
-// src/hooks/useFilter.js
+
 import useSearchQuestions from './useSearchQuestions';
 
 function useFilter() {
-  // Получаем всё из нашего нового главного хука
+  
   const { filters, questions, updateFilters, loading } = useSearchQuestions();
 
-  // Создаём удобные методы для обновления каждого фильтра по отдельности
+  
   const filterActions = {
     setKeywords: (keywords) => updateFilters({ keywords }),
     setPageNumber: (pageNumber) => updateFilters({ pageNumber }),
@@ -14,7 +14,7 @@ function useFilter() {
     setSelectedLevels: (level) => updateFilters({ selectedLevels: level }),
     setSelectedRating: (rating) => updateFilters({ selectedRating: rating }),
     setSelectedStatus: (status) => updateFilters({ selectedStatus: status }),
-    clearFilters: () => updateFilters({ // Метод для сброса всех фильтров
+    clearFilters: () => updateFilters({ 
       keywords: '',
       selectedSpec: '',
       selectedSkill: '',
@@ -25,9 +25,9 @@ function useFilter() {
     }),
   };
 
-  // Возвращаем всё, что нужно в Main.jsx
+  
   return {
-    filterValues: { ...filters, questions }, // Объединяем фильтры и данные вопросов
+    filterValues: { ...filters, questions }, 
     filterActions,
     loading,
   };
