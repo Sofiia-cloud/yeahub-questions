@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styles from "./Question.module.css";
+import LevelTag from "../LevelTag/LevelTag";
 function Question({ question, isOpen, toggleQuestion }) {
   return (
     <li key={question.id}>
@@ -12,15 +13,8 @@ function Question({ question, isOpen, toggleQuestion }) {
       </button>
       {isOpen && (
         <>
-          <div>
-            <span className={styles.tag_name}>
-              Рейтинг: <span className={styles.tag}>{question.rate}</span>
-            </span>
-            <span className={styles.tag_name}>
-              Сложность:{" "}
-              <span className={styles.tag}>{question.complexity}</span>
-            </span>
-          </div>
+          <LevelTag question={question} />
+
           {question.imageSrc && (
             <img src={question.imageSrc} alt="Изображение ответа" />
           )}

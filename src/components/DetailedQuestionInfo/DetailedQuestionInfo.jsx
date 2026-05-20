@@ -1,20 +1,13 @@
+import LevelTag from "../LevelTag/LevelTag";
 import styles from "./DetailedQuestionInfo.module.css";
 
 function DetailedQuestionInfo({ question }) {
   return (
     <div className={styles.infoContainer}>
       <div className={styles.infoCard}>
-       
         <div className={styles.levelRow}>
           <span className={styles.infoLabel}>Уровень:</span>
-          <div className={styles.levelGroup}>
-            <span className={styles.levelLabel}>Сложность:</span>
-            <span className={styles.tag}>{question.complexity}</span>
-          </div>
-          <div className={styles.levelGroup}>
-            <span className={styles.levelLabel}>Рейтинг:</span>
-            <span className={styles.tag}>{question.rate}</span>
-          </div>
+          <LevelTag question={question} />
         </div>
 
         <div className={styles.infoRow}>
