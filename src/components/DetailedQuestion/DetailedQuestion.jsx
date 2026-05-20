@@ -12,13 +12,9 @@ function DetailedQuestion({ question }) {
   const nextId = currentId + 1;
 
   const getShortLongAnswer = () => {
-    if (!question.longAnswer) return "Нет развёрнутого ответа";
-    const textWithoutHtml = question.longAnswer.replace(/<[^>]*>/g, "");
-    if (textWithoutHtml.length <= 100) return question.longAnswer;
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = question.longAnswer;
-    const text = tempDiv.textContent || tempDiv.innerText || "";
-    return text.slice(0, 100) + "...";
+    if (question.longAnswer?.length <= 100) return question.longAnswer;
+
+    return question.longAnswer?.slice(0, 100) + "...";
   };
 
   return (
